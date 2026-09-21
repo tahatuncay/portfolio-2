@@ -1,0 +1,319 @@
+/* ── Hero Retro Skeuomorphic Music Player ── */
+
+.playerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1.75rem 0 1.25rem 0;
+  perspective: 1000px;
+}
+
+.chassis {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+  height: 108px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  background: var(--player-chassis-bg, #dedcd7);
+  border: 1px solid var(--player-chassis-border, rgba(255, 255, 255, 0.45));
+  box-shadow: 
+    0 16px 36px -10px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 2px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+  user-select: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.chassis:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 22px 42px -10px rgba(0, 0, 0, 0.4),
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    inset 0 2px 2px rgba(255, 255, 255, 0.7),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Turntable Well & Vinyl Record ── */
+.turntableWell {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: #111215;
+  box-shadow: 
+    inset 0 3px 8px rgba(0, 0, 0, 0.8),
+    0 1px 2px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.vinylDisc {
+  position: relative;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at center, transparent 0%, transparent 18%, rgba(255, 255, 255, 0.08) 25%, transparent 35%, rgba(255, 255, 255, 0.06) 55%, transparent 68%),
+    repeating-radial-gradient(
+      circle at center,
+      #1f1f23 0,
+      #1f1f23 1.5px,
+      #141417 2px,
+      #141417 3px
+    );
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rotateDisc 3.5s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinylDisc.playing {
+  animation-play-state: running;
+}
+
+/* Brass center spindle & label */
+.vinylLabel {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffd27d 0%, #c4943f 60%, #855819 100%);
+  border: 1.5px solid #4a340e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.spindleHole {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0d0d0f;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+/* Vinyl Sheen Overlay */
+.vinylSheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 45deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.14) 45deg,
+    transparent 90deg,
+    transparent 180deg,
+    rgba(255, 255, 255, 0.14) 225deg,
+    transparent 270deg
+  );
+  pointer-events: none;
+}
+
+@keyframes rotateDisc {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Center Console ── */
+.centerConsole {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  min-width: 0;
+}
+
+/* Track title */
+.trackTitle {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--player-text-title, #282725);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+  margin-bottom: 7px;
+  text-align: center;
+}
+
+/* Progress area */
+.progressContainer {
+  width: 100%;
+  max-width: 220px;
+  cursor: pointer;
+  padding: 5px 0;
+  touch-action: none;
+}
+
+.progressTrack {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--player-track-bg, #c2bfb9);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  overflow: visible;
+}
+
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #f5b82e; /* Reference yellow bar */
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(245, 184, 46, 0.4);
+}
+
+.progressThumb {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #d4d4d8 65%, #8e8e93 100%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
+}
+
+.progressContainer:hover .progressThumb {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+/* Time labels */
+.timeRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 220px;
+  margin-top: 3px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: var(--player-text-time, #66635f);
+}
+
+/* Transport Controls Row */
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.skipBtn {
+  background: none;
+  border: none;
+  color: var(--player-btn-secondary, #52504b);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.skipBtn:hover {
+  color: var(--player-btn-primary-bg, #1a1a1c);
+  transform: scale(1.15);
+}
+
+.playBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--player-btn-primary-bg, #1c1d22);
+  border: 1px solid var(--player-btn-primary-border, rgba(255, 255, 255, 0.15));
+  color: var(--player-btn-primary-icon, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.playBtn:hover {
+  transform: scale(1.08);
+  background: #0f1012;
+  box-shadow: 
+    0 6px 14px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.playBtn:active {
+  transform: scale(0.95);
+}
+
+/* ── Responsive adjustments ── */
+@media (max-width: 600px) {
+  .chassis {
+    max-width: 360px;
+    height: 94px;
+    padding: 0 10px;
+  }
+
+  .turntableWell {
+    width: 64px;
+    height: 64px;
+  }
+
+  .vinylDisc {
+    width: 60px;
+    height: 60px;
+  }
+
+  .vinylLabel {
+    width: 20px;
+    height: 20px;
+  }
+
+  .centerConsole {
+    padding: 0 8px;
+  }
+
+  .trackTitle {
+    font-size: 0.68rem;
+    max-width: 150px;
+    margin-bottom: 5px;
+  }
+
+  .progressContainer,
+  .timeRow {
+    max-width: 160px;
+  }
+
+  .playBtn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .controlsRow {
+    gap: 8px;
+  }
+}

@@ -1,0 +1,125 @@
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ════════════════ SUN ════════════════ */
+.sun {
+  position: absolute;
+  top: 4%;
+  right: 12%;
+  transition: opacity var(--theme-transition);
+}
+
+.sunCore {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 230, 160, 0.9) 0%,
+    rgba(255, 200, 100, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+.sunGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 120, 0.2) 0%,
+    rgba(255, 180, 80, 0.08) 40%,
+    transparent 70%
+  );
+}
+
+.sunHalo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 220, 140, 0.06) 0%,
+    transparent 60%
+  );
+}
+
+/* ════════════════ MOON ════════════════ */
+.moon {
+  position: absolute;
+  top: 6%;
+  left: 15%;
+  transition: opacity var(--theme-transition);
+}
+
+.moonDisc {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 40%,
+    #e8e4d8 0%,
+    #d4cfc0 50%,
+    #c0baa8 100%
+  );
+  box-shadow:
+    inset -8px -4px 0 rgba(180, 170, 150, 0.4),
+    0 0 20px rgba(220, 215, 200, 0.3);
+  position: relative;
+}
+
+/* Subtle crater texture */
+.moonDisc::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 12px;
+  left: 16px;
+  border-radius: 50%;
+  background: rgba(170, 160, 140, 0.25);
+  box-shadow:
+    10px 8px 0 -1px rgba(170, 160, 140, 0.2),
+    -5px 14px 0 -2px rgba(170, 160, 140, 0.15),
+    6px -4px 0 -1px rgba(170, 160, 140, 0.18);
+}
+
+.moonGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(180, 200, 230, 0.08) 0%,
+    rgba(140, 160, 200, 0.03) 40%,
+    transparent 70%
+  );
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .sun { top: 11%; right: 8%; }
+  .sunCore { width: 40px; height: 40px; }
+  .sunGlow { width: 120px; height: 120px; }
+  .sunHalo { width: 300px; height: 300px; }
+
+  .moon { top: 11%; left: 8%; }
+  .moonDisc { width: 30px; height: 30px; }
+  .moonGlow { width: 180px; height: 180px; }
+}

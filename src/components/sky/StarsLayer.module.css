@@ -1,0 +1,65 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: var(--star-opacity);
+  transition: opacity var(--theme-transition-slow);
+}
+
+.tinyLayer,
+.smallLayer,
+.glowLayer {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── Star base ── */
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #e8eef8;
+  pointer-events: none;
+}
+
+/* ── Twinkle animation ── */
+.twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+.glow {
+  box-shadow: 0 0 6px 2px rgba(180, 200, 240, 0.4);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .twinkle {
+    animation: none !important;
+  }
+}
+
+/* ── Responsive: fewer stars on mobile ── */
+@media (max-width: 767px) {
+  .tinyLayer .star:nth-child(n+40) {
+    display: none;
+  }
+  .smallLayer .star:nth-child(n+15) {
+    display: none;
+  }
+  .glowLayer .star:nth-child(n+4) {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tinyLayer .star:nth-child(n+60) {
+    display: none;
+  }
+  .smallLayer .star:nth-child(n+20) {
+    display: none;
+  }
+}
