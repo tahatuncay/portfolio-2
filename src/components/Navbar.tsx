@@ -77,7 +77,11 @@ export default function Navbar() {
             onClick={() => scrollTo("hero")}
             aria-label="Ana sayfaya git"
           >
-            <span className={styles.logoText}>[TT]</span>
+            <img
+              src="/portfolio-logo.png"
+              alt="Taha Tuncay Logo"
+              className={styles.logoImage}
+            />
           </button>
 
           {/* Desktop nav */}

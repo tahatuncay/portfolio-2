@@ -33,12 +33,15 @@
   z-index: 10;
 }
 
-.logoText {
-  font-family: var(--font-playfair), serif;
-  font-size: var(--text-xl);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
+.logoImage {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  transition: filter var(--theme-transition-fast);
+}
+
+:global(html[data-theme="night"]) .logoImage {
+  filter: invert(1) brightness(1.8);
 }
 
 /* Desktop nav */
