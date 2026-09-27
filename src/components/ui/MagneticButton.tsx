@@ -15,6 +15,7 @@ interface MagneticButtonProps {
   ariaLabel?: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  download?: boolean | string;
 }
 
 export default function MagneticButton({
@@ -29,6 +30,7 @@ export default function MagneticButton({
   ariaLabel,
   type = "button",
   disabled = false,
+  download,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -64,6 +66,7 @@ export default function MagneticButton({
         href={as === "a" ? href : undefined}
         target={as === "a" ? target : undefined}
         rel={as === "a" ? rel : undefined}
+        download={as === "a" ? download : undefined}
         aria-label={ariaLabel}
         type={as === "button" ? type : undefined}
         disabled={as === "button" ? disabled : undefined}

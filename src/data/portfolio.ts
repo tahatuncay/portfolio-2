@@ -112,7 +112,7 @@ export const profile: Profile = {
   shortBio: "Dijital ürünler, teknoloji ve yaratıcı çözümler üzerine çalışıyorum.",
   statement: "",
   avatar: "/avatar/profile.jpg",
-  resumeUrl: "/resume/cv.pdf",
+  resumeUrl: "/resume/taha-tuncay-cv.pdf",
   availability: "Yeni fırsatlara açık",
   specialization: "İş Analizi ve Yapay Zeka",
 };

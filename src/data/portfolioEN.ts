@@ -23,7 +23,7 @@ export const profileEN: Profile = {
   shortBio: "Working on digital products, technology, and creative solutions.",
   statement: "",
   avatar: "/avatar/profile.jpg",
-  resumeUrl: "/resume/cv.pdf",
+  resumeUrl: "/resume/taha-tuncay-cv-eng.pdf",
   availability: "Open to new opportunities",
   specialization: "Business Analysis & Artificial Intelligence",
 };

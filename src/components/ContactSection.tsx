@@ -148,6 +148,7 @@ export default function ContactSection() {
                 <MagneticButton
                   as="a"
                   href={profile.resumeUrl}
+                  download
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary"
