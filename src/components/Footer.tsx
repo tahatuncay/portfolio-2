@@ -1,21 +1,25 @@
 "use client";
 
-import { profile, socialLinks } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./Footer.module.css";
 
-const navItems = [
-  { id: "hero", label: "Ana Sayfa" },
-  { id: "hakkimda", label: "Hakkımda" },
-  { id: "deneyim", label: "Deneyim" },
-  { id: "projeler", label: "Projeler" },
-  { id: "sertifikalar", label: "Sertifikalar" },
-  { id: "gonulluluk", label: "Gönüllülük" },
-  { id: "yetenekler", label: "Yetenekler" },
-  { id: "iletisim", label: "İletişim" },
-];
-
 export default function Footer() {
+  const { t } = useLanguage();
+  const { profile, socialLinks } = usePortfolioData();
+
+  const navItems = [
+    { id: "hero", labelKey: "nav.home" },
+    { id: "hakkimda", labelKey: "nav.about" },
+    { id: "deneyim", labelKey: "nav.experience" },
+    { id: "projeler", labelKey: "nav.projects" },
+    { id: "sertifikalar", labelKey: "nav.certifications" },
+    { id: "gonulluluk", labelKey: "nav.volunteering" },
+    { id: "yetenekler", labelKey: "nav.skills" },
+    { id: "iletisim", labelKey: "nav.contact" },
+  ];
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -39,7 +43,7 @@ export default function Footer() {
           {/* Info */}
           <ScrollReveal delay={0.1}>
             <div className={styles.col}>
-              <span className={styles.colTitle}>Hakkında</span>
+              <span className={styles.colTitle}>{t("footer.about")}</span>
               <p className={styles.colText}>
                 {profile.title} · {profile.location}
               </p>
@@ -55,7 +59,7 @@ export default function Footer() {
           {/* Navigation */}
           <ScrollReveal delay={0.2}>
             <div className={styles.col}>
-              <span className={styles.colTitle}>Navigasyon</span>
+              <span className={styles.colTitle}>{t("footer.navigation")}</span>
               <nav className={styles.navList}>
                 {navItems.map((item) => (
                   <button
@@ -63,7 +67,7 @@ export default function Footer() {
                     className={styles.navLink}
                     onClick={() => scrollTo(item.id)}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </button>
                 ))}
               </nav>
@@ -73,7 +77,7 @@ export default function Footer() {
           {/* Social */}
           <ScrollReveal delay={0.3}>
             <div className={styles.col}>
-              <span className={styles.colTitle}>Bağlantılar</span>
+              <span className={styles.colTitle}>{t("footer.links")}</span>
               <div className={styles.socialList}>
                 {socialLinks.map((link) => (
                   <a
@@ -130,11 +134,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className={styles.bottom}>
           <span className={styles.copyright}>
-            © {year} {profile.firstName} {profile.lastName}. Tüm hakları
-            saklıdır.
+            © {year} {profile.firstName} {profile.lastName}. {t("footer.copyright")}
           </span>
           <span className={styles.tagline}>
-            Dijital dünyada üretmeye devam ediyor.
+            {t("footer.tagline")}
           </span>
         </div>
       </div>

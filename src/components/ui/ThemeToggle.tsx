@@ -1,21 +1,23 @@
 "use client";
 
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./ThemeToggle.module.css";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLanguage();
   const isNight = theme === "night";
 
   return (
     <button
       className={styles.toggle}
       onClick={toggleTheme}
-      aria-label={isNight ? "Gündüz temasına geç" : "Gece temasına geç"}
+      aria-label={isNight ? t("theme.switchDay") : t("theme.switchNight")}
       role="switch"
       aria-checked={isNight}
-      title={isNight ? "Gündüz" : "Gece"}
+      title={isNight ? t("theme.day") : t("theme.night")}
       data-cursor="pointer"
     >
       <div className={styles.iconWrapper}>

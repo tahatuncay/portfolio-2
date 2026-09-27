@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./ProjectsSection.module.css";
 
-function ProjectImage({ project }: { project: (typeof projects)[0] }) {
+function ProjectImage({ project }: { project: { image?: string; number: string; name: string } }) {
   const [hasError, setHasError] = useState(false);
 
   if (project.image && !hasError) {
@@ -28,17 +29,19 @@ function ProjectImage({ project }: { project: (typeof projects)[0] }) {
 }
 
 export default function ProjectsSection() {
+  const { t } = useLanguage();
+  const { projects } = usePortfolioData();
   const featured = projects.filter((p) => p.featured);
 
   return (
     <section id="projeler" className={styles.section}>
       <div className={styles.container}>
         <ScrollReveal>
-          <span className={styles.eyebrow}>Seçili Çalışmalar</span>
+          <span className={styles.eyebrow}>{t("proj.eyebrow")}</span>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className={styles.heading}>Projelerim</h2>
+          <h2 className={styles.heading}>{t("proj.heading")}</h2>
         </ScrollReveal>
 
         <div className={styles.grid}>
@@ -88,7 +91,7 @@ export default function ProjectsSection() {
                     <span className={styles.status}>
                       <span
                         className={`${styles.statusDot} ${
-                          project.status === "Geliştiriliyor"
+                          project.status === "Geliştiriliyor" || project.status === "In Development"
                             ? styles.statusActive
                             : ""
                         }`}
@@ -128,9 +131,9 @@ export default function ProjectsSection() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.link}
-                          aria-label={`${project.name} canlı site`}
+                          aria-label={`${project.name} ${t("proj.livesite")}`}
                         >
-                          Canlı Site
+                          {t("proj.livesite")}
                           <svg
                             width="12"
                             height="12"

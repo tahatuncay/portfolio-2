@@ -1,12 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { profile, socialLinks } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import MagneticButton from "./ui/MagneticButton";
 import styles from "./ContactSection.module.css";
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+  const { profile, socialLinks } = usePortfolioData();
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -32,9 +36,7 @@ export default function ContactSection() {
 
     if (!accessKey) {
       setStatus("missing_key");
-      setStatusMessage(
-        "E-posta servisi henüz aktif edilmedi. Lütfen anahtarınızı ekleyin."
-      );
+      setStatusMessage(t("contact.missingKey"));
       return;
     }
 
@@ -53,7 +55,7 @@ export default function ContactSection() {
           name: formState.name.trim(),
           email: formState.email.trim(),
           message: formState.message.trim(),
-          subject: `Portfolyo İletişim: ${formState.name.trim()}`,
+          subject: `${t("contact.subject")}: ${formState.name.trim()}`,
           from_name: `${formState.name.trim()} (Portfolyo)`,
         }),
       });
@@ -62,10 +64,7 @@ export default function ContactSection() {
 
       if (response.ok && data.success) {
         setStatus("success");
-        setStatusMessage(
-          data.message ||
-            "Mesajınız başarıyla iletildi! En kısa sürede dönüş yapacağım."
-        );
+        setStatusMessage(data.message || t("contact.successMessage"));
         setFormState({ name: "", email: "", message: "", botcheck: "" });
         setTimeout(() => {
           setStatus("idle");
@@ -73,15 +72,11 @@ export default function ContactSection() {
         }, 6000);
       } else {
         setStatus("error");
-        setStatusMessage(
-          data.message || "Mesaj gönderilemedi. Lütfen tekrar deneyiniz."
-        );
+        setStatusMessage(data.message || t("contact.failMessage"));
       }
     } catch {
       setStatus("error");
-      setStatusMessage(
-        "Bağlantı hatası oluştu. Lütfen doğrudan e-posta ile iletişime geçiniz."
-      );
+      setStatusMessage(t("contact.errorMessage"));
     }
   };
 
@@ -92,23 +87,22 @@ export default function ContactSection() {
           {/* Left — heading + info */}
           <div className={styles.left}>
             <ScrollReveal>
-              <span className={styles.eyebrow}>İletişim</span>
+              <span className={styles.eyebrow}>{t("contact.eyebrow")}</span>
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
               <h2 className={styles.heading}>
-                Bir Fikrin mi Var?
+                {t("contact.heading1")}
                 <br />
                 <span className={styles.headingAccent}>
-                  Konuşalım.
+                  {t("contact.heading2")}
                 </span>
               </h2>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
               <p className={styles.description}>
-                Yeni projeler, iş birliği fırsatları veya sadece merhaba demek
-                için bana ulaşabilirsin.
+                {t("contact.description")}
               </p>
             </ScrollReveal>
 
@@ -157,9 +151,9 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary"
-                  ariaLabel="CV'yi indir"
+                  ariaLabel={t("contact.downloadCV")}
                 >
-                  CV&apos;yi İndir
+                  {t("contact.downloadCV")}
                 </MagneticButton>
               </div>
             </ScrollReveal>
@@ -183,13 +177,13 @@ export default function ContactSection() {
 
               <div className={styles.field}>
                 <label htmlFor="contact-name" className={styles.label}>
-                  Ad Soyad
+                  {t("contact.nameLabel")}
                 </label>
                 <input
                   id="contact-name"
                   type="text"
                   className={styles.input}
-                  placeholder="Adınız ve soyadınız"
+                  placeholder={t("contact.namePlaceholder")}
                   required
                   value={formState.name}
                   onChange={(e) =>
@@ -201,13 +195,13 @@ export default function ContactSection() {
 
               <div className={styles.field}>
                 <label htmlFor="contact-email" className={styles.label}>
-                  E-posta
+                  {t("contact.emailLabel")}
                 </label>
                 <input
                   id="contact-email"
                   type="email"
                   className={styles.input}
-                  placeholder="E-posta adresiniz"
+                  placeholder={t("contact.emailPlaceholder")}
                   required
                   value={formState.email}
                   onChange={(e) =>
@@ -219,12 +213,12 @@ export default function ContactSection() {
 
               <div className={styles.field}>
                 <label htmlFor="contact-message" className={styles.label}>
-                  Mesaj
+                  {t("contact.messageLabel")}
                 </label>
                 <textarea
                   id="contact-message"
                   className={styles.textarea}
-                  placeholder="Mesajınızı yazın..."
+                  placeholder={t("contact.messagePlaceholder")}
                   rows={5}
                   required
                   value={formState.message}
@@ -276,10 +270,10 @@ export default function ContactSection() {
                   <span className={styles.statusText}>
                     {statusMessage}{" "}
                     <a
-                      href={`mailto:${profile.email}?subject=İletişim&body=${encodeURIComponent(formState.message)}`}
+                      href={`mailto:${profile.email}?subject=${encodeURIComponent(t("contact.subject"))}&body=${encodeURIComponent(formState.message)}`}
                       style={{ color: "inherit", textDecoration: "underline" }}
                     >
-                      Doğrudan mail göndermek için tıklayın.
+                      {t("contact.directMail")}
                     </a>
                   </span>
                 </div>
@@ -303,12 +297,12 @@ export default function ContactSection() {
                     <line x1="12" y1="17" x2="12.01" y2="17" />
                   </svg>
                   <span className={styles.statusText}>
-                    E-posta servisi henüz aktif edilmedi. Lütfen <code>.env.local</code> dosyasına Web3Forms anahtarınızı ekleyin.{" "}
+                    {t("contact.missingKey")}{" "}
                     <a
-                      href={`mailto:${profile.email}?subject=${encodeURIComponent("İletişim Formu Mesajı - " + formState.name)}&body=${encodeURIComponent(formState.message)}`}
+                      href={`mailto:${profile.email}?subject=${encodeURIComponent(t("contact.subject") + " - " + formState.name)}&body=${encodeURIComponent(formState.message)}`}
                       style={{ color: "inherit", textDecoration: "underline", fontWeight: 600 }}
                     >
-                      Veya şimdi doğrudan mail uygulamasıyla gönderin.
+                      {t("contact.missingKeyDirect")}
                     </a>
                   </span>
                 </div>
@@ -323,12 +317,12 @@ export default function ContactSection() {
                   {status === "submitting" ? (
                     <>
                       <span className={styles.spinner} />
-                      <span>Gönderiliyor...</span>
+                      <span>{t("contact.submitting")}</span>
                     </>
                   ) : status === "success" ? (
-                    "Gönderildi ✓"
+                    t("contact.submitted")
                   ) : (
-                    "Gönder"
+                    t("contact.submit")
                   )}
                 </span>
               </MagneticButton>

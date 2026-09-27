@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "@/hooks/useTheme";
+import { LanguageProvider } from "@/hooks/useLanguage";
 import { AudioProvider } from "@/context/AudioContext";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -25,22 +26,24 @@ export default function HomeClient() {
 
   return (
     <ThemeProvider>
-      <AudioProvider>
-        {isMounted && <CustomCursor />}
-        <SkyBackground />
-        <Navbar />
-        <main>
-          <Hero />
-          <AboutSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <CertificationsSection />
-          <VolunteeringSection />
-          <SkillsSection />
-          <ContactSection />
-        </main>
-        <Footer />
-      </AudioProvider>
+      <LanguageProvider>
+        <AudioProvider>
+          {isMounted && <CustomCursor />}
+          <SkyBackground />
+          <Navbar />
+          <main>
+            <Hero />
+            <AboutSection />
+            <ExperienceSection />
+            <ProjectsSection />
+            <CertificationsSection />
+            <VolunteeringSection />
+            <SkillsSection />
+            <ContactSection />
+          </main>
+          <Footer />
+        </AudioProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

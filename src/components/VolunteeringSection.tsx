@@ -1,6 +1,7 @@
 "use client";
 
-import { volunteering } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./VolunteeringSection.module.css";
 
@@ -10,20 +11,23 @@ function formatUrlLabel(url: string) {
     const parsed = new URL(formatted);
     return parsed.hostname.replace(/^www\./, "");
   } catch {
-    return "Web Sitesi";
+    return "Website";
   }
 }
 
 export default function VolunteeringSection() {
+  const { t } = useLanguage();
+  const { volunteering } = usePortfolioData();
+
   return (
     <section id="gonulluluk" className={styles.section}>
       <div className={styles.container}>
         <ScrollReveal>
-          <span className={styles.eyebrow}>Topluma Katkı</span>
+          <span className={styles.eyebrow}>{t("vol.eyebrow")}</span>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className={styles.heading}>Gönüllülük Deneyimlerim</h2>
+          <h2 className={styles.heading}>{t("vol.heading")}</h2>
         </ScrollReveal>
 
         <div className={styles.list}>
@@ -64,7 +68,7 @@ export default function VolunteeringSection() {
                       </div>
                     </div>
                     <span className={styles.date}>
-                      {vol.startDate} — {vol.endDate || "Günümüz"}
+                      {vol.startDate} — {vol.endDate || t("vol.present")}
                     </span>
                   </div>
 
@@ -72,7 +76,7 @@ export default function VolunteeringSection() {
 
                   {vol.contributions.length > 0 && (
                     <div className={styles.contributions}>
-                      <span className={styles.contLabel}>Katkılarım</span>
+                      <span className={styles.contLabel}>{t("vol.contributions")}</span>
                       <ul className={styles.contList}>
                         {vol.contributions.map((cont, i) => (
                           <li key={i}>{cont}</li>

@@ -2,12 +2,16 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { profile } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import MagneticButton from "./ui/MagneticButton";
 import MusicPlayer from "./ui/MusicPlayer";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
+  const { t } = useLanguage();
+  const { profile } = usePortfolioData();
+
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -140,7 +144,7 @@ export default function Hero() {
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Projelerimi İncele
+              {t("hero.viewProjects")}
               <svg
                 width="16"
                 height="16"
@@ -165,26 +169,26 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              CV&apos;mi Görüntüle
+              {t("hero.viewCV")}
             </MagneticButton>
           </motion.div>
 
           {/* Metadata row */}
           <motion.div className={styles.metadata} variants={itemVariants}>
             <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Konum</span>
+              <span className={styles.metaLabel}>{t("hero.location")}</span>
               <span className={styles.metaValue}>{profile.location}</span>
             </div>
             <div className={styles.metaDivider} />
             <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Uzmanlık</span>
+              <span className={styles.metaLabel}>{t("hero.specialization")}</span>
               <span className={styles.metaValue}>
                 {profile.specialization}
               </span>
             </div>
             <div className={styles.metaDivider} />
             <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Durum</span>
+              <span className={styles.metaLabel}>{t("hero.status")}</span>
               <span className={styles.metaValue}>
                 {profile.availability}
               </span>

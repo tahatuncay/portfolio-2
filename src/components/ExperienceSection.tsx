@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { experience } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./ExperienceSection.module.css";
 
 export default function ExperienceSection() {
+  const { t } = useLanguage();
+  const { experience } = usePortfolioData();
   const [openId, setOpenId] = useState<string | null>(null);
 
   const toggle = (id: string) => {
@@ -19,13 +22,13 @@ export default function ExperienceSection() {
         <div className={styles.layout}>
           {/* Vertical label */}
           <ScrollReveal className={styles.verticalLabelWrap}>
-            <span className={styles.verticalLabel}>İş Deneyimlerim</span>
+            <span className={styles.verticalLabel}>{t("exp.verticalLabel")}</span>
           </ScrollReveal>
 
           {/* List */}
           <div className={styles.list}>
             <ScrollReveal>
-              <span className={styles.eyebrow}>Profesyonel Deneyim</span>
+              <span className={styles.eyebrow}>{t("exp.eyebrow")}</span>
             </ScrollReveal>
 
             {experience.map((exp, index) => (
@@ -53,7 +56,7 @@ export default function ExperienceSection() {
                         <span className={styles.type}>{exp.type}</span>
                       )}
                       <span className={styles.date}>
-                        {exp.startDate} — {exp.endDate || "Günümüz"}
+                        {exp.startDate} — {exp.endDate || t("exp.present")}
                       </span>
                       <div className={styles.toggle}>
                         <span />
@@ -83,7 +86,7 @@ export default function ExperienceSection() {
                           {exp.responsibilities.length > 0 && (
                             <div className={styles.responsibilities}>
                               <span className={styles.respLabel}>
-                                Öne Çıkan Sorumluluklar
+                                {t("exp.responsibilities")}
                               </span>
                               <ul className={styles.respList}>
                                 {exp.responsibilities.map((resp, i) => (

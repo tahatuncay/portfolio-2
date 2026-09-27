@@ -2,22 +2,26 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/hooks/useLanguage";
 import ThemeToggle from "./ui/ThemeToggle";
+import LanguageToggle from "./ui/LanguageToggle";
 import AudioWaveToggle from "./ui/AudioWaveToggle";
 import styles from "./Navbar.module.css";
 
-const navItems = [
-  { id: "hero", label: "Ana Sayfa" },
-  { id: "hakkimda", label: "Hakkımda" },
-  { id: "deneyim", label: "Deneyim" },
-  { id: "projeler", label: "Projeler" },
-  { id: "sertifikalar", label: "Sertifikalar" },
-  { id: "gonulluluk", label: "Gönüllülük" },
-  { id: "yetenekler", label: "Yetenekler" },
-  { id: "iletisim", label: "İletişim" },
-];
-
 export default function Navbar() {
+  const { t } = useLanguage();
+
+  const navItems = [
+    { id: "hero", labelKey: "nav.home" },
+    { id: "hakkimda", labelKey: "nav.about" },
+    { id: "deneyim", labelKey: "nav.experience" },
+    { id: "projeler", labelKey: "nav.projects" },
+    { id: "sertifikalar", labelKey: "nav.certifications" },
+    { id: "gonulluluk", labelKey: "nav.volunteering" },
+    { id: "yetenekler", labelKey: "nav.skills" },
+    { id: "iletisim", labelKey: "nav.contact" },
+  ];
+
   const [activeSection, setActiveSection] = useState("hero");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -75,7 +79,7 @@ export default function Navbar() {
           <button
             className={styles.logo}
             onClick={() => scrollTo("hero")}
-            aria-label="Ana sayfaya git"
+            aria-label={t("nav.home")}
           >
             <img
               src="/portfolio-logo.png"
@@ -93,7 +97,7 @@ export default function Navbar() {
                   }`}
                 onClick={() => scrollTo(item.id)}
               >
-                {item.label}
+                {t(item.labelKey)}
                 {activeSection === item.id && (
                   <motion.span
                     className={styles.activeDot}
@@ -109,15 +113,16 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Actions: Sound wave toggle + Theme toggle + Hamburger */}
+          {/* Actions: Language toggle + Sound wave toggle + Theme toggle + Hamburger */}
           <div className={styles.navActions}>
+            <LanguageToggle />
             <AudioWaveToggle />
             <ThemeToggle />
             <button
               className={`${styles.hamburger} ${isMobileMenuOpen ? styles.open : ""
                 }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-label={isMobileMenuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={isMobileMenuOpen}
             >
               <span />
@@ -159,12 +164,13 @@ export default function Navbar() {
                     <span className={styles.mobileNum}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {item.label}
+                    {t(item.labelKey)}
                   </motion.button>
                 ))}
 
-                {/* Theme & sound toggle in mobile menu */}
+                {/* Theme, Language & sound toggle in mobile menu */}
                 <div className={styles.mobileThemeToggle}>
+                  <LanguageToggle />
                   <AudioWaveToggle />
                   <ThemeToggle />
                 </div>

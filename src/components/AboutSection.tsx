@@ -1,16 +1,20 @@
 "use client";
 
-import { profile, education } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./AboutSection.module.css";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
+  const { profile, education } = usePortfolioData();
+
   return (
     <section id="hakkimda" className={styles.section}>
       <div className={styles.container}>
         {/* Eyebrow */}
         <ScrollReveal>
-          <span className={styles.eyebrow}>Hakkımda</span>
+          <span className={styles.eyebrow}>{t("about.eyebrow")}</span>
         </ScrollReveal>
 
         {/* Statement */}
@@ -30,7 +34,7 @@ export default function AboutSection() {
           {education.length > 0 && (
             <ScrollReveal delay={0.3}>
               <div className={styles.metaCard}>
-                <span className={styles.metaLabel}>Eğitim</span>
+                <span className={styles.metaLabel}>{t("about.education")}</span>
                 <span className={styles.metaValue}>
                   {education[0].institution}
                 </span>
@@ -43,14 +47,14 @@ export default function AboutSection() {
 
           <ScrollReveal delay={0.4}>
             <div className={styles.metaCard}>
-              <span className={styles.metaLabel}>Konum</span>
+              <span className={styles.metaLabel}>{t("about.location")}</span>
               <span className={styles.metaValue}>{profile.location}</span>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
             <div className={styles.metaCard}>
-              <span className={styles.metaLabel}>Uzmanlık</span>
+              <span className={styles.metaLabel}>{t("about.specialization")}</span>
               <span className={styles.metaValue}>
                 {profile.specialization}
               </span>
@@ -59,9 +63,9 @@ export default function AboutSection() {
 
           <ScrollReveal delay={0.6}>
             <div className={styles.metaCard}>
-              <span className={styles.metaLabel}>İlgi Alanları</span>
+              <span className={styles.metaLabel}>{t("about.interests")}</span>
               <span className={styles.metaValue}>
-                Yapay Zeka · Açık Kaynak · Web Servisleri · API
+                {t("about.interestsValue")}
               </span>
             </div>
           </ScrollReveal>

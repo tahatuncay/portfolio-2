@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { certifications } from "@/data/portfolio";
+import { useLanguage } from "@/hooks/useLanguage";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import ScrollReveal from "./ui/ScrollReveal";
 import styles from "./CertificationsSection.module.css";
 
 export default function CertificationsSection() {
+  const { t } = useLanguage();
+  const { certifications } = usePortfolioData();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const categories = Array.from(
@@ -21,11 +24,11 @@ export default function CertificationsSection() {
     <section id="sertifikalar" className={styles.section}>
       <div className={styles.container}>
         <ScrollReveal>
-          <span className={styles.eyebrow}>Profesyonel Gelişim</span>
+          <span className={styles.eyebrow}>{t("cert.eyebrow")}</span>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <h2 className={styles.heading}>Sertifikalarım</h2>
+          <h2 className={styles.heading}>{t("cert.heading")}</h2>
         </ScrollReveal>
 
         {/* Filter */}
@@ -37,7 +40,7 @@ export default function CertificationsSection() {
               }`}
               onClick={() => setActiveCategory(null)}
             >
-              Tümü
+              {t("cert.all")}
             </button>
             {categories.map((cat) => (
               <button
@@ -93,7 +96,7 @@ export default function CertificationsSection() {
                         rel="noopener noreferrer"
                         className={styles.verifyLink}
                       >
-                        Doğrula
+                        {t("cert.verify")}
                         <svg
                           width="12"
                           height="12"
