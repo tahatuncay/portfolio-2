@@ -108,7 +108,7 @@ export const profile: Profile = {
   title: "İş Analisti",
   location: "İstanbul, Türkiye",
   email: "taha.tuncay@icloud.com",
-  bio: "İş Analisti olarak, kurumların ihtiyaçlarını analiz ederek sorunlara çözüm stratejileri geliştiriyor, paydaşlar arasında bir köprü kurarak iş süreçlerini iyileştiriyor ve verimliliği artırıyorum. Boş zamanlarımda kişisel çalışmalarımla kullanıcılara yönelik yeni projeler geliştiriyorum. Sürekli öğrenmeye açık, problem çözme odaklı ve takım çalışmasına yatkın biriyim.",
+  bio: "Yenilikçi ve öğrenmeye odaklı bir İş Analisti olarak; karmaşık iş süreçlerini anlama, analiz etme ve teknoloji odaklı çözümler geliştirme konularında uzmanlığa sahibim. Web servisleri, API entegrasyonları ve son kullanıcı desteği alanlarındaki deneyimimden yararlanarak etkili çözümler sunuyorum. Kişisel yapay zeka projeleriyle pekiştirdiğim geliştirme odaklı bakış açım, dijital dönüşüm hedeflerine katkıda bulunma konusundaki motivasyonumu güçlendiriyor.",
   shortBio: "Dijital ürünler, teknoloji ve yaratıcı çözümler üzerine çalışıyorum.",
   statement: "",
   avatar: "/avatar/profile.jpg",

@@ -19,7 +19,7 @@ export const profileEN: Profile = {
   title: "Business Analyst",
   location: "Istanbul, Türkiye",
   email: "taha.tuncay@icloud.com",
-  bio: "As a Business Analyst, I analyze organizational needs to develop solution strategies, serve as a bridge between stakeholders to improve business processes and enhance efficiency. In my spare time, I develop user-oriented projects through personal work. I am open to continuous learning, problem-solving oriented, and well-suited for teamwork.",
+  bio: "As an innovative and learning-oriented Business Analyst, I possess expertise in comprehending, analyzing complex business processes, and developing technology-driven solutions. I deliver effective solutions leveraging my experience in web services, API integrations, and end-user support. My development-focused perspective, cultivated through personal AI projects, reinforces my motivation to contribute to digital transformation objectives.",
   shortBio: "Working on digital products, technology, and creative solutions.",
   statement: "",
   avatar: "/avatar/profile.jpg",
